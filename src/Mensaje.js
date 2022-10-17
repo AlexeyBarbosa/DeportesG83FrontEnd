@@ -1,5 +1,5 @@
-export function Mensaje() {
-    return "Desarrollo de software!";
+export function Mensaje(props) {
+    return <p>{props.fecha}: {props.equipo1} vs {props.equipo2}</p>;
 }
 
 export function titulo() {
