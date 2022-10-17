@@ -1,9 +1,17 @@
 import React from 'react';
-import './css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import ReactDom from 'react-dom/client';
-import { Mensaje, titulo, Asistentes, printEvento } from './Mensaje';
-import Header from './elements/Header';
+import { Mensaje, titulo, Asistentes, PrintEvento } from './Mensaje';
+import { PrintEventos } from './elements/eventos/listEventos';
+import Header from './elements/general/Header';
+import { Footer } from './elements/general/Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { PrintEquipos } from './elements/equipos/getEquipos';
+import { PrintUsuarios } from './elements/usuarios/getUsuarios';
+import { PrintDeportes } from './elements/deportes/getDeportes';
+import { createFormDeporte } from './elements/deportes/createDeporte';
 
 const root = ReactDom.createRoot(document.getElementById('root'));
 let eventoPrueba = {
@@ -19,17 +27,19 @@ let eventoPrueba = {
 root.render(
     <Router>
         <Header />
-        <h1>{titulo()}</h1>
-        <p> <Mensaje fecha="2022-10-17" equipo1="Equipo1" equipo2="Equipo2" /></p>
-        <p> <Mensaje fecha="2022-01-20" equipo1="Equipo1" equipo2="Equipo2" /> </p>
-        <p> <Mensaje fecha="1999-10-17" equipo1="Equipo1" equipo2="Equipo2" /> </p>
-        <div> {Asistentes("jugadores", 40)} </div>
-        {printEvento(eventoPrueba)}
+        <div style={{ paddingTop: "50px" }}>
+            <Routes>
 
-        <Routes>
+                <Route path="/" element={PrintEventos()}></Route>
+                <Route path="/equipos" element={PrintEquipos()}></Route>
+                <Route path="/deportes" element={PrintDeportes()}></Route>
+                <Route path="/usuarios" element={PrintUsuarios()}></Route>
+                <Route path="/deporte/create" element={createFormDeporte()}></Route>
 
-            <Route path="/" element={Asistentes("Caracteres de ruta", 0)}></Route>
-            <Route path="/dos" element={Asistentes("Caracteres de ruta", 2)}></Route>
 
-        </Routes>
+
+
+            </Routes>
+        </div>
+        <Footer />
     </Router>);
