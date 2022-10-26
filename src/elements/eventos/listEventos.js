@@ -8,7 +8,7 @@ const bootstrap = require('bootstrap')
 let modalBot;
 
 export function PrintEventos() {
-    let eventos = [
+    /*let eventos = [
         {
             "id": 1,
             "equipo1": "Equipo1",
@@ -24,8 +24,10 @@ export function PrintEventos() {
             "marcador1": 1,
             "marcador2": 5,
             "fecha": "2022-10-13T22:40:47.564Z"
-        }];
-    //const [eventos, setEventos] = useState([]);
+        }];*/
+    console.log("Línea 28");
+    const [eventos, setEventos] = useState([]);
+    console.log("Línea 30");
 
     function cargar() {
         const requestOptions = {
@@ -38,16 +40,33 @@ export function PrintEventos() {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
-                //setEventos(data)
+                setEventos(data)
             })
             .catch(error => console.log(error))
     }
-    /*useEffect(()=>{ 
+    useEffect(() => {
         cargar()
-    },[])*/
-
+    }, [])
 
     return <>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    eventos.map(dato => (
+                        <tr><td>{dato.nombre}</td></tr>
+                    ))
+                }
+            </tbody>
+        </table>
+    </>
+
+
+    /*return <>
         <div className="text-center">
             <h1>Eventos</h1>
             <Link type="button" to="/evento/create" className="btn btn-success"><i className="bi bi-plus-circle"></i> Agregar Evento</Link>
@@ -66,7 +85,7 @@ export function PrintEventos() {
                 </div>
             ))
         }
-    </>
+    </>*/
 }
 
 function showModal(evento) {
